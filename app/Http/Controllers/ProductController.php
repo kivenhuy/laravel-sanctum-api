@@ -68,7 +68,15 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        return Product::destroy($id);
+        $check =  Product::destroy($id);
+        if($check)
+        {
+            return "Delete Product Successfully";
+        }
+        else
+        {
+            return "Delete Product  Failed";
+        }
     }
 
      /**
@@ -80,5 +88,20 @@ class ProductController extends Controller
     public function search($name)
     {
         return Product::where('name', 'like', '%'.$name.'%')->get();
+    }
+
+    public function searchbystore(Request $request)
+    {
+        $id_store = $request->header('id_store');
+        $pagination = $request->header('pagination');
+        if(!empty($pagination))
+        {
+            return Product::where('id_store', 'like', '%'.$id_store.'%')->paginate($pagination);
+        }
+        else
+        {
+            return Product::where('id_store', 'like', '%'.$id_store.'%')->get();
+        }
+        
     }
 }

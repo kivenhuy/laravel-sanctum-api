@@ -65,7 +65,15 @@ class StoreController extends Controller
      */
     public function destroy($id)
     {
-        return Store::destroy($id);
+        $check =  Store::destroy($id);
+        if($check)
+        {
+            return "Delete Store Successfully";
+        }
+        else
+        {
+            return "Delete Store Failed";
+        }
     }
 
      /**
@@ -77,5 +85,19 @@ class StoreController extends Controller
     public function search($name)
     {
         return Store::where('name', 'like', '%'.$name.'%')->get();
+    }
+
+    public function searchbyusers(Request $request)
+    {
+        $id_users = $request->header('id_users');
+        $pagination = $request->header('pagination');
+        if(!empty($pagination))
+        {
+            return Store::where('id_users', 'like', '%'.$id_users.'%')->paginate($pagination);
+        }
+        else
+        {
+            return Store::where('id_users', 'like', '%'.$id_users.'%')->get();
+        }
     }
 }

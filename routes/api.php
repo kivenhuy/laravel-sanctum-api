@@ -22,15 +22,13 @@ use Illuminate\Support\Facades\Route;
 // Public routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::get('/products', [ProductController::class, 'index']);
-Route::get('/products/{id}', [ProductController::class, 'show']);
-Route::get('/products/search/{name}', [ProductController::class, 'search']);
-Route::get('/stores', [StoreController::class, 'index']);
-Route::get('/stores/{id}', [StoreController::class, 'show']);
-Route::get('/stores/search/{name}', [StoreController::class, 'search']);
+
+
 
 // Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/products', [ProductController::class, 'index']);
+    Route::get('/stores', [StoreController::class, 'index']);
     Route::post('/products', [ProductController::class, 'store']);
     Route::put('/products/{id}', [ProductController::class, 'update']);
     Route::delete('/products/{id}', [ProductController::class, 'destroy']);
@@ -38,6 +36,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::put('/stores/{id}', [StoreController::class, 'update']);
     Route::delete('/stores/{id}', [StoreController::class, 'destroy']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/stores/searchbyusers', [StoreController::class, 'searchbyusers']);
+    Route::get('/products/searchbystore', [ProductController::class, 'searchbystore']);
+    Route::get('/stores/{id}', [StoreController::class, 'show']);
+    Route::get('/stores/search/{name}', [StoreController::class, 'search']);
+    Route::get('/products/{id}', [ProductController::class, 'show']);
+    Route::get('/products/search/{name}', [ProductController::class, 'search']);
 });
 
 
