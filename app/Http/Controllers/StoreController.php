@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Store;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class StoreController extends Controller
@@ -61,6 +62,10 @@ class StoreController extends Controller
     public function update(Request $request, $id)
     {
         $Store = Store::find($id);
+        if($Store == null)
+        {
+            return "Record not found";
+        }
         $Store->update($request->all());
         return $Store;
     }
@@ -73,6 +78,11 @@ class StoreController extends Controller
      */
     public function destroy($id)
     {
+        $Store = Store::find($id);
+        if($Store == null)
+        {
+            return "Record not found";
+        }
         $check =  Store::destroy($id);
         if($check)
         {
@@ -107,6 +117,11 @@ class StoreController extends Controller
     public function searchbyusers(Request $request)
     {
         $id_users = $request->header('id_users');
+        $check =  User::find($id_users);
+        if($check ==  null)
+        {
+            return "ID Users not exists try again";
+        }
         $pagination = $request->header('pagination');
         if(!empty($pagination))
         {

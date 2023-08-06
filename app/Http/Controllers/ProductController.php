@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-
+use App\Models\Store;
 class ProductController extends Controller
 {
     /**
@@ -64,6 +64,10 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
+        if($product == null)
+        {
+            return "Record not found";
+        }
         $product->update($request->all());
         return $product;
     }
@@ -76,6 +80,11 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+        $product = Product::find($id);
+        if($product == null)
+        {
+            return "Record not found";
+        }
         $check =  Product::destroy($id);
         if($check)
         {
@@ -108,7 +117,13 @@ class ProductController extends Controller
 
     public function searchbystore(Request $request)
     {
+        
         $id_store = $request->header('id_store');
+        $check =  Store::find($id_store);
+        if($check ==  null)
+        {
+            return "ID Store not exists try again";
+        }
         $pagination = $request->header('pagination');
         if(!empty($pagination))
         {
