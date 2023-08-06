@@ -40,7 +40,15 @@ class StoreController extends Controller
      */
     public function show($id)
     {
-        return Store::find($id);
+        $check =  Store::find($id);
+        if($check ==  null)
+        {
+            return "Record not found";
+        }
+        else
+        {
+            return Store::find($id);
+        }
     }
 
     /**
@@ -84,7 +92,16 @@ class StoreController extends Controller
      */
     public function search($name)
     {
-        return Store::where('name', 'like', '%'.$name.'%')->get();
+        $check = Store::where('name', 'like', '%'.$name.'%')->get();
+        if($check ==  null)
+        {
+            return "Record not found";
+        }
+        else
+        {
+            return Store::where('name', 'like', '%'.$name.'%')->get();
+        }
+        
     }
 
     public function searchbyusers(Request $request)
