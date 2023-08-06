@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Product;
+use App\Models\Store;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class StoreController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +13,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::all();
+        return Store::all();
     }
 
     /**
@@ -27,12 +26,10 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'slug' => 'required',
-            'price' => 'required',
-            'id_store' => 'required'
+            'id_users' => 'required'
         ]);
 
-        return Product::create($request->all());
+        return Store::create($request->all());
     }
 
     /**
@@ -43,7 +40,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return Product::find($id);
+        return Store::find($id);
     }
 
     /**
@@ -55,9 +52,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = Product::find($id);
-        $product->update($request->all());
-        return $product;
+        $Store = Store::find($id);
+        $Store->update($request->all());
+        return $Store;
     }
 
     /**
@@ -68,7 +65,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        return Product::destroy($id);
+        return Store::destroy($id);
     }
 
      /**
@@ -79,6 +76,6 @@ class ProductController extends Controller
      */
     public function search($name)
     {
-        return Product::where('name', 'like', '%'.$name.'%')->get();
+        return Store::where('name', 'like', '%'.$name.'%')->get();
     }
 }
