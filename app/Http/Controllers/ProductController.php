@@ -46,7 +46,10 @@ class ProductController extends Controller
         $check =  Product::find($id);
         if($check ==  null)
         {
-            return "Record not found";
+            $response = [
+                'message' => "Product Not Found",
+            ];
+            return response($response, 404);
         }
         else
         {
@@ -66,7 +69,10 @@ class ProductController extends Controller
         $product = Product::find($id);
         if($product == null)
         {
-            return "Record not found";
+            $response = [
+                'message' => "Product Not Found",
+            ];
+            return response($response, 404);
         }
         $product->update($request->all());
         return $product;
@@ -83,16 +89,26 @@ class ProductController extends Controller
         $product = Product::find($id);
         if($product == null)
         {
-            return "Record not found";
+            $response = [
+                'message' => "Product Not Found",
+            ];
+            return response($response, 404);
         }
+        
         $check =  Product::destroy($id);
         if($check)
         {
-            return "Delete Product Successfully";
+            $response = [
+                'message' => "Delete Product Successfully",
+            ];
+            return response($response, 200);
         }
         else
         {
-            return "Delete Product  Failed";
+            $response = [
+                'message' => "Delete Product Failed",
+            ];
+            return response($response, 400);
         }
     }
 
@@ -107,7 +123,10 @@ class ProductController extends Controller
         $check = Product::where('name', 'like', '%'.$name.'%')->get();
         if(count($check) ==  0)
         {
-            return "Record not found";
+            $response = [
+                'message' => "Product Not Found",
+            ];
+            return response($response, 404);
         }
         else
         {
@@ -122,7 +141,10 @@ class ProductController extends Controller
         $check =  Store::find($id_store);
         if($check ==  null)
         {
-            return "ID Store not exists try again";
+            $response = [
+                'message' => "ID Store Not Exists",
+            ];
+            return response($response, 404);
         }
         $pagination = $request->header('pagination');
         if(!empty($pagination))

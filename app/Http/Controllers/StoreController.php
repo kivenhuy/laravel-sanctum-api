@@ -44,7 +44,10 @@ class StoreController extends Controller
         $check =  Store::find($id);
         if($check ==  null)
         {
-            return "Record not found";
+            $response = [
+                'message' => "Store Not Found",
+            ];
+            return response($response, 404);
         }
         else
         {
@@ -64,7 +67,10 @@ class StoreController extends Controller
         $Store = Store::find($id);
         if($Store == null)
         {
-            return "Record not found";
+            $response = [
+                'message' => "Store Not Found",
+            ];
+            return response($response, 404);
         }
         $Store->update($request->all());
         return $Store;
@@ -81,16 +87,25 @@ class StoreController extends Controller
         $Store = Store::find($id);
         if($Store == null)
         {
-            return "Record not found";
+            $response = [
+                'message' => "Store Not Found",
+            ];
+            return response($response, 404);
         }
         $check =  Store::destroy($id);
         if($check)
         {
-            return "Delete Store Successfully";
+            $response = [
+                'message' => "Delete Store Successfully",
+            ];
+            return response($response, 200);
         }
         else
         {
-            return "Delete Store Failed";
+            $response = [
+                'message' => "Delete Store Failed",
+            ];
+            return response($response, 400);
         }
     }
 
@@ -105,7 +120,10 @@ class StoreController extends Controller
         $check = Store::where('name', 'like', '%'.$name.'%')->get();
         if(count($check) ==  0)
         {
-            return "Record not found";
+            $response = [
+                'message' => "Store Not Found",
+            ];
+            return response($response, 404);
         }
         else
         {
@@ -120,7 +138,10 @@ class StoreController extends Controller
         $check =  User::find($id_users);
         if($check ==  null)
         {
-            return "ID Users not exists try again";
+            $response = [
+                'message' => "ID Users Not Exist",
+            ];
+            return response($response, 404);
         }
         $pagination = $request->header('pagination');
         if(!empty($pagination))
