@@ -43,7 +43,15 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return Product::find($id);
+        $check =  Product::find($id);
+        if($check ==  null)
+        {
+            return "Record not found";
+        }
+        else
+        {
+            return Product::find($id);
+        }
     }
 
     /**
@@ -87,7 +95,15 @@ class ProductController extends Controller
      */
     public function search($name)
     {
-        return Product::where('name', 'like', '%'.$name.'%')->get();
+        $check = Product::where('name', 'like', '%'.$name.'%')->get();
+        if(count($check) ==  0)
+        {
+            return "Record not found";
+        }
+        else
+        {
+            return Product::where('name', 'like', '%'.$name.'%')->get();
+        }
     }
 
     public function searchbystore(Request $request)

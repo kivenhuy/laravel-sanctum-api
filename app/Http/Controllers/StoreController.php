@@ -93,7 +93,7 @@ class StoreController extends Controller
     public function search($name)
     {
         $check = Store::where('name', 'like', '%'.$name.'%')->get();
-        if($check ==  null)
+        if(count($check) ==  0)
         {
             return "Record not found";
         }
