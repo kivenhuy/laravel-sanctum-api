@@ -27,7 +27,7 @@ class StoreController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'id_users' => 'required'
+            'user_id' => 'required'
         ]);
         $id_users = $request->id_users;
         $check =  User::find($id_users);
