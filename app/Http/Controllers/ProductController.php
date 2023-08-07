@@ -153,7 +153,7 @@ class ProductController extends Controller
             ];
             return response($response, 404);
         }
-        if(!empty($pagination))
+        else
         {
             return Product::where('id_store', 'like', '%'.$id.'%')->paginate(10);
         }

@@ -150,7 +150,7 @@ class StoreController extends Controller
             ];
             return response($response, 404);
         }
-        if(!empty($pagination))
+        else
         {
             return Store::where('id_users', 'like', '%'.$id.'%')->paginate(10);
         }
