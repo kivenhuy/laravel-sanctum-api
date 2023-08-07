@@ -155,7 +155,8 @@ class ProductController extends Controller
         }
         else
         {
-            return Product::where('id_store', 'like', '%'.$id.'%')->paginate(10);
+            $check =  Store::find($id)->getProduct()->paginate(10);
+            return $check;
         }
         
     }

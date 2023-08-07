@@ -42,4 +42,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    function getStore()
+    {
+        return $this->hasMany('App\Models\Store');
+    }
 }

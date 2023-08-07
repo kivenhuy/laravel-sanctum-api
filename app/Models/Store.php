@@ -15,4 +15,9 @@ class Store extends Model
         'address',
         'description'
     ];
+
+    function getProduct()
+    {
+        return $this->hasMany('App\Models\Product');
+    }
 }

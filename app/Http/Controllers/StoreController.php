@@ -152,7 +152,8 @@ class StoreController extends Controller
         }
         else
         {
-            return Store::where('id_users', 'like', '%'.$id.'%')->paginate(10);
+            $check =  User::find($id)->getStore()->paginate(10);
+            return $check;
         }
     }
 }
