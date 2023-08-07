@@ -31,7 +31,16 @@ class ProductController extends Controller
             'price' => 'required',
             'id_store' => 'required'
         ]);
-
+        $id_store = $request->id_store;
+        $check =  Store::find($id_store);
+        if($check ==  null)
+        {
+            $response = [
+                'message' => "ID Store Not Exists",
+            ];
+            return response($response, 404);
+        }
+        // print_r($id_store);
         return Product::create($request->all());
     }
 

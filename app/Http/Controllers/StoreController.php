@@ -29,7 +29,15 @@ class StoreController extends Controller
             'name' => 'required',
             'id_users' => 'required'
         ]);
-
+        $id_users = $request->id_users;
+        $check =  User::find($id_users);
+        if($check ==  null)
+        {
+            $response = [
+                'message' => "ID Users Not Exist",
+            ];
+            return response($response, 404);
+        }
         return Store::create($request->all());
     }
 
