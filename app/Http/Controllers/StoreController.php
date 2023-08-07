@@ -140,10 +140,9 @@ class StoreController extends Controller
         
     }
 
-    public function searchbyusers(Request $request)
+    public function searchbyusers($id)
     {
-        $id_users = $request->header('id_users');
-        $check =  User::find($id_users);
+        $check =  User::find($id);
         if($check ==  null)
         {
             $response = [
@@ -151,14 +150,9 @@ class StoreController extends Controller
             ];
             return response($response, 404);
         }
-        $pagination = $request->header('pagination');
         if(!empty($pagination))
         {
-            return Store::where('id_users', 'like', '%'.$id_users.'%')->paginate($pagination);
-        }
-        else
-        {
-            return Store::where('id_users', 'like', '%'.$id_users.'%')->get();
+            return Store::where('id_users', 'like', '%'.$id.'%')->paginate(10);
         }
     }
 }

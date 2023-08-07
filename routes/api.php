@@ -36,8 +36,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::put('/stores/{id}', [StoreController::class, 'update']);
     Route::delete('/stores/{id}', [StoreController::class, 'destroy']);
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('/stores/searchbyusers', [StoreController::class, 'searchbyusers']);
-    Route::get('/products/searchbystore', [ProductController::class, 'searchbystore']);
+    Route::get('/stores/searchbyusers/{id}', [StoreController::class, 'searchbyusers']);
+    Route::get('/products/searchbystore/{id}', [ProductController::class, 'searchbystore']);
     Route::get('/stores/{id}', [StoreController::class, 'show']);
     Route::get('/stores/search/{name}', [StoreController::class, 'search']);
     Route::get('/products/{id}', [ProductController::class, 'show']);

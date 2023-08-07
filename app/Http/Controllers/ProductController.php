@@ -143,11 +143,9 @@ class ProductController extends Controller
         }
     }
 
-    public function searchbystore(Request $request)
+    public function searchbystore($id)
     {
-        
-        $id_store = $request->header('id_store');
-        $check =  Store::find($id_store);
+        $check =  Store::find($id);
         if($check ==  null)
         {
             $response = [
@@ -155,14 +153,9 @@ class ProductController extends Controller
             ];
             return response($response, 404);
         }
-        $pagination = $request->header('pagination');
         if(!empty($pagination))
         {
-            return Product::where('id_store', 'like', '%'.$id_store.'%')->paginate($pagination);
-        }
-        else
-        {
-            return Product::where('id_store', 'like', '%'.$id_store.'%')->get();
+            return Product::where('id_store', 'like', '%'.$id.'%')->paginate(10);
         }
         
     }
