@@ -144,6 +144,7 @@ class StoreController extends Controller
     {
         $id_users = $request->header('id_users');
         $check =  User::find($id_users);
+        print_r($check);
         if($check ==  null)
         {
             $response = [
