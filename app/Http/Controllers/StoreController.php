@@ -145,21 +145,21 @@ class StoreController extends Controller
         $id_users = $request->header('id_users');
         $check =  User::find($id_users);
         print_r($check);
-        if($check ==  null)
-        {
-            $response = [
-                'message' => "ID Users Not Exist",
-            ];
-            return response($response, 404);
-        }
-        $pagination = $request->header('pagination');
-        if(!empty($pagination))
-        {
-            return Store::where('id_users', 'like', '%'.$id_users.'%')->paginate($pagination);
-        }
-        else
-        {
-            return Store::where('id_users', 'like', '%'.$id_users.'%')->get();
-        }
+        // if($check ==  null)
+        // {
+        //     $response = [
+        //         'message' => "ID Users Not Exist",
+        //     ];
+        //     return response($response, 404);
+        // }
+        // $pagination = $request->header('pagination');
+        // if(!empty($pagination))
+        // {
+        //     return Store::where('id_users', 'like', '%'.$id_users.'%')->paginate($pagination);
+        // }
+        // else
+        // {
+        //     return Store::where('id_users', 'like', '%'.$id_users.'%')->get();
+        // }
     }
 }
