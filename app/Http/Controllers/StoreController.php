@@ -29,7 +29,7 @@ class StoreController extends Controller
             'name' => 'required',
             'user_id' => 'required'
         ]);
-        $id_users = $request->id_users;
+        $id_users = $request->user_id;
         $check =  User::find($id_users);
         if($check ==  null)
         {

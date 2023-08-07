@@ -29,9 +29,9 @@ class ProductController extends Controller
             'name' => 'required',
             'slug' => 'required',
             'price' => 'required',
-            'id_store' => 'required'
+            'store_id' => 'required'
         ]);
-        $id_store = $request->id_store;
+        $id_store = $request->store_id;
         $check =  Store::find($id_store);
         if($check ==  null)
         {
